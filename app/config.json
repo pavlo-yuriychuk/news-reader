@@ -1,0 +1,13 @@
+{
+   "port": 8080,
+    "feeds": [
+        {
+            "name": "BBC Top",
+            "url": "http://feeds.bbci.co.uk/news/video_and_audio/news_front_page/rss.xml?edition=uk#"
+        },
+        {
+            "name": "SKY news",
+            "url": "http://news.sky.com/feeds/rss/home.xml"
+        }
+    ]
+}

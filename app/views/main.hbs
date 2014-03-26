@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        {{#each feeds}}
+            <h1>{{name}}</h1>
+            <section>
+                {{#each posts}}
+                    <article>
+                        <h2>{{title}}</h2>
+                        <p>{{content}}</p>
+                    </article>
+                {{/each}}
+            </section>
+        {{/each}}
+    </body>
+</html>

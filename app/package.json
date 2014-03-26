@@ -1,0 +1,10 @@
+{
+  "name": "news-reader",
+  "description": "node.js based newsreader",
+  "respository": "https://github.com/pavlo-yuriychuk/news-reader.git",
+  "version": "0.0.1",
+  "dependencies": {
+    "handlebars": "~2.0.0-alpha.2",
+    "q": "~1.0.1"
+  }
+}
