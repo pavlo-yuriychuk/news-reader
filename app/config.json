@@ -1,5 +1,9 @@
 {
    "port": 8080,
+   "db": {
+        "connection": "username:password@example.com/mydb",
+        "collections": ["feeds"]
+    },
     "feeds": [
         {
             "name": "BBC Top",

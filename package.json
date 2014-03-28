@@ -1,0 +1,25 @@
+{
+  "name": "news-reader",
+  "version": "0.0.0",
+  "description": "news-reader ===========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pavlo-yuriychuk/news-reader.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/pavlo-yuriychuk/news-reader/issues"
+  },
+  "dependencies": {
+    "request": "~2.34.0",
+    "feedparser": "~0.16.6",
+    "underscore": "~1.6.0",
+    "daemon": "~1.1.0",
+    "mongojs": "~0.10.1"
+  }
+}
