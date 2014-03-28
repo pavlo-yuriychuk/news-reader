@@ -5,6 +5,10 @@
   "version": "0.0.1",
   "dependencies": {
     "handlebars": "~2.0.0-alpha.2",
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "daemon": "~1.1.0",
+    "underscore": "~1.6.0",
+    "feedparser": "~0.16.6",
+    "request": "~2.34.0"
   }
 }
