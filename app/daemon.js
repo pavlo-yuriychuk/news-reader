@@ -6,61 +6,85 @@ var config = require('./config.json');
 var _ = require('underscore');
 var FeedParser = require('feedparser');
 var request = require('request');
+var jf = require('jsonfile');
+var Logger = require('./utils/log');
+var mkdirp = require('mkdirp');
+var path = require('path');
+
+var logger = Logger.getInstance("feed-daemon", config.logPath);
 
 const POLLING_INTERVAL = 1*60*1000;
 
-function fetch(url) {
-	var req = request(url);
+function fetch(feedItem) {
+    var req = request(feedItem.url);
 	var feedparser = new FeedParser();
-	
+    var items = [];
+
 	req.on('error', function (error) {
-	  console.error(error);
+      logger.error(error);
 	});
 
 	req.on('response', function (res) {
 	  var stream = this;
 	  if (res.statusCode != 200) {
-	  	console.error(res.text);
+        logger.error(res.text);
 	  	return;
 	  }
 	  stream.pipe(feedparser);
 	});
 
 	feedparser.on('error', function(error) {
-	  console.error(error);
+	  logger.error(error);
 	});
-
-	feedparser.on('readable', function() {
+    feedparser.on('readable', function() {
 	  var stream = this;
 	  var meta = this.meta;
 	  var item;
 
 	  while (item = stream.read()) {
-	    console.log(item);
-	  }
+          if (item) {
+              items.push(_.pick(item, "title", "summary", "guid", "description", "author", "pubDate", "image"));
+          };
+	  };
 	});
+
+    mkdirp(config.dataPath, function (err) {
+        logger.error(err);
+    });
+
+    feedparser.on('end', function () {
+        jf.writeFile(path.join(config.dataPath, feedItem.name + ".json"), items, function (err) {
+            logger.error(err);
+        });
+    });
 };
 
 function fetchAllFeeds() {
 	_.each(config.feeds, function (item) {
-		fetch(item.url);
+		fetch(item);
 	});
 };
 
+
+
 var fetchTimer = setInterval(function () {
-	fetchAllFeeds();
+    fetchAllFeeds();
 }, POLLING_INTERVAL);
 
 process.on('SIGHUP', function () {
-	if (fetchTimer) {
-		killTimer(fetchTimer);
-	};
+    logger.debug("Caught SIGHUP");
+    if (fetchTimer) {
+        clearInterval(fetchTimer);
+    };
+    process.exit();
 });
 
 process.on('SIGTERM', function () {
-	if (fetchTimer) {
-		killTimer(fetchTimer);
-	};
+    logger.debug("Caught SIGTERM");
+    if (fetchTimer) {
+        clearInterval(fetchTimer);
+    };
+    process.exit();
 });
-
-// fetchAllFeeds();
+fetchAllFeeds();
+logger.info("Started daemon with PID:" + process.pid);

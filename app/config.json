@@ -1,16 +1,20 @@
 {
    "port": 8080,
+    "logPath": "../log",
+    "dataPath": "../data",
    "db": {
         "connection": "username:password@example.com/mydb",
         "collections": ["feeds"]
     },
     "feeds": [
         {
-            "name": "BBC Top",
+            "title": "BBC Top",
+            "name": "bbc-top",
             "url": "http://feeds.bbci.co.uk/news/video_and_audio/news_front_page/rss.xml?edition=uk#"
         },
         {
-            "name": "SKY news",
+            "title": "SKY news",
+            "name": "sky-news",
             "url": "http://news.sky.com/feeds/rss/home.xml"
         }
     ]
