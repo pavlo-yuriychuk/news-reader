@@ -5,15 +5,19 @@
     </head>
     <body>
         {{#each feeds}}
-            <h1>{{name}}</h1>
-            <section>
-                {{#each posts}}
-                    <article>
-                        <h2>{{title}}</h2>
-                        <p>{{content}}</p>
-                    </article>
-                {{/each}}
-            </section>
+        <section>
+            <h1>{{title}}</h1>
+            {{#each posts}}
+                <article>
+                    <h2>{{title}}</h2>
+                    <span>{{description}}</span>
+                    <p>{{summary}}</p>
+                    {{#if image}}
+                        <img src="{{image.url}}">
+                    {{/if}}
+                </article>
+            {{/each}}
+        </section>
         {{/each}}
     </body>
 </html>
