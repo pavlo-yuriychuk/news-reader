@@ -23,6 +23,6 @@
     "mongojs": "~0.10.1"
   },
   "scripts": {
-      "start": "node ./app/daemon.js && node ./app/server.js"
+      "start": "cd ./app && npm install && cd .. && node ./app/daemon.js && node ./app/server.js"
   }
 }
