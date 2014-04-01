@@ -21,5 +21,8 @@
     "underscore": "~1.6.0",
     "daemon": "~1.1.0",
     "mongojs": "~0.10.1"
+  },
+  "scripts": {
+      "start": "node ./app/daemon.js && node ./app/server.js"
   }
 }

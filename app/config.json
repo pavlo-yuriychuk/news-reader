@@ -1,11 +1,7 @@
 {
    "port": 8080,
-    "logPath": "../log",
-    "dataPath": "../data",
-   "db": {
-        "connection": "username:password@example.com/mydb",
-        "collections": ["feeds"]
-    },
+    "logPath": "./log",
+    "dataPath": "./data",
     "feeds": [
         {
             "title": "BBC Top",
